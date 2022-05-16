@@ -1,0 +1,19 @@
+server:
+  port: 7001
+  error:
+    include-message: always
+
+spring:
+  datasource:
+    url: jdbc:h2:mem:shortener;DB_CLOSE_ON_EXIT=FALSE
+    username: sa
+    password:
+    driverClassName: org.h2.Driver
+  h2:
+    console.enabled: true
+
+application:
+  base-url: http://localhost:${server.port}/
+  shorten-url-length: 6
+  scheduler:
+    clear-clicked-data-job-cron: "0 0 0 * * *"
