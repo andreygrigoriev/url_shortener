@@ -25,6 +25,9 @@ public class RedirectionController {
 
    @GetMapping("/{suffix}")
    public void redirect(@PathVariable String suffix, HttpServletResponse response) throws IOException {
+      if (StringUtils.isEmpty(suffix)) {
+         throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Invalid URL");
+      }
       String originalUrl = urlShortenerService.getOriginalAndIncrementClickedTimes(suffix);
       if (StringUtils.isEmpty(originalUrl)) {
          throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Cannot find original url");
